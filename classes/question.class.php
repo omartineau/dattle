@@ -16,9 +16,11 @@ class Question
     {
         global $con;
         if ($question_id) {
-            $query = $con->query("SELECT * FROM questions WHERE questions_id=".$question_id);
-            $query->setFetchMode(PDO::FETCH_OBJ);
-            $f = $query->fetch();
+
+            $query = $con->prepare('SELECT * FROM questions WHERE questions_id=:question_id;');
+            $query->execute(array('question_id'=>$question_id));
+
+            $f = $query->fetch(PDO::FETCH_OBJ);
             $this->questions_id = $f->questions_id;
             $this->questions_text = $f->questions_text;
             $this->questions_type = $f->questions_type;
@@ -28,6 +30,20 @@ class Question
             $this->questions_resp_good = $f->questions_resp_good;
             $this->cities_id = $f->cities_id;
             $this->questions_datasource = $f->questions_datasource;
+        }
+
+    }
+    function insert() {
+
+
+    }
+    static function getQuestions($cities_id,$question_numb) {
+        global $con;
+        $query = $con->query("SELECT questions_id FROM questions WHERE cities_id='".$cities_id."' ORDER BY RAND() LIMIT ".$question_numb);
+        $query->setFetchMode(PDO::FETCH_OBJ);
+        $questionsList = array();
+        while ($f = $query->fetch()) {
+            $questionsList[] = $f->questions_id;
         }
 
     }
