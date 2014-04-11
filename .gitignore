@@ -1,0 +1,25 @@
+### Fichiers config
+
+config.php
+#constantes.php
+
+### Fichiers sensibles
+
+# apache
+.htgroups
+.htpasswd
+
+### Fichiers temporaires et fichiers système
+
+# dechets windows / macos
+Thumbs.db
+*.DS_Store
+
+# fichiers vim
+*~
+*.swp
+*.swo
+
+# dechets phpstorm
+.idea/
+
