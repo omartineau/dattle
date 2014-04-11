@@ -23,3 +23,5 @@ Thumbs.db
 # dechets phpstorm
 .idea/
 
+# config db
+db.php
