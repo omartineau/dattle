@@ -120,9 +120,19 @@
         // Evenement au clic
         google.maps.event.addListener(marker{{ city.cities_id }}, 'click', function() {
             $(this).load("cityInfo.php?city={{ city.cities_id }}");
+            // Make an AJAX request to get the data  
+            // The return will be put into the InfoWindow  
+            $.ajax({  
+                url: 'cityInfo.php?city={{ city.cities_id }}',  
+                success: function(data) {  
+                    iw.setContent(data);  
+                    iw.open(map, marker);  
+                }  
+            });             
         });
         {% endfor %}
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+
