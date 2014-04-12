@@ -10,13 +10,13 @@ class User
     public $users_round_played = 0;
 
 
-    function __construct($users_id)
+    function __construct($users_id=0)
     {
         global $con;
 
-        $query = $con->prepare('SELECT * FROM users WHERE users_email = :users_email');
+        $query = $con->prepare('SELECT * FROM users WHERE users_id = :users_id');
         $query->execute(array(
-            'users_email'       => $this->users_email
+            'users_id'       => $users_id
         ));
         if ($f = $query->fetch(PDO::FETCH_OBJ))
         {
@@ -25,6 +25,7 @@ class User
             $this->users_round_avail  = (int)$f->users_round_avail;
             $this->users_round_played = (int)$f->users_round_played;
         }
+        $this->logged = false;
     }
 
     // Auth an user

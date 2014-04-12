@@ -1,0 +1,16 @@
+
+{% if loginFailed %}
+<p>Mauvais email ou mot de passe !</p>
+{% endif %}
+
+{% if user.logged %}
+    Bienvenue {{ user.users_pseudo }} !
+
+{% else %}
+    <form method="POST">
+        <p>email : <input name='email' type="text" /></p>
+        <p>password : <input name="password" type="password" /></p>
+        <INPUT TYPE="submit" VALUE="login" />
+    </form>
+
+{% endif %}
