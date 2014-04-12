@@ -1,20 +1,20 @@
 <?php
-include('config.php');
+include('includes/config.php');
 
 echo "<pre>";
 
+// $user->Auth('olivier@cigogne.net', 'pwd');
 
-echo "try to auth olivier@cigogne.net:pwd\n";
-$u = new User();
-//$u->Create('toto@mail.com', 'pwd', 'toto');
-$u->Auth('olivier@cigogne.net', 'pwd');
-var_dump($u);
+var_dump($user);
 echo "\n";
 
 echo "Get user cities\n";
-$cities = City::getUserCities($u->users_id);
-var_dump($cities);
-
+$cities = City::getUserCities($user->users_id);
+foreach ($cities as $c)
+{
+    $city = new City($c);
+    var_dump($city);
+}
 
 
 echo "</pre>";

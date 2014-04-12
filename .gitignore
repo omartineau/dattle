@@ -24,4 +24,4 @@ Thumbs.db
 .idea/
 
 # config db
-db.php
+includes/db.php

@@ -3,12 +3,29 @@
 class User
 {
     public $logged = false; // true if user logged
-    public $users_id;
+    public $users_id = 0;
     public $users_email;
     public $users_pseudo;
     public $users_round_avail  = 0;
     public $users_round_played = 0;
 
+
+    function __construct($users_id)
+    {
+        global $con;
+
+        $query = $con->prepare('SELECT * FROM users WHERE users_email = :users_email');
+        $query->execute(array(
+            'users_email'       => $this->users_email
+        ));
+        if ($f = $query->fetch(PDO::FETCH_OBJ))
+        {
+            $this->users_id           = $f->users_id;
+            $this->users_pseudo       = $f->users_pseudo;
+            $this->users_round_avail  = (int)$f->users_round_avail;
+            $this->users_round_played = (int)$f->users_round_played;
+        }
+    }
 
     // Auth an user
     function Auth($email, $password)
@@ -82,7 +99,6 @@ class User
     }
 
     // TODO : resent pwd
-
 
 }
 
