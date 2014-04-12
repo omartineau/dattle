@@ -7,10 +7,11 @@ class City
     public $cities_class;
     public $cities_canton;
     public $cities_kml;
-    public $cities_polulation;
-    public $cities_win_score;
-    public $users_id;
-    public $cities_win_dt;
+    public $cities_polulation = 0;
+    public $cities_win_score = 0;
+    public $users_id = 0;
+    public $cities_win_dt = 0;
+    public $cities_win_dt2;
 
 
 
@@ -33,6 +34,17 @@ class City
             $this->users_id = $f->users_id;
             $this->cities_win_dt = $f->cities_win_dt;
 
+            // capture date, DateInterval type
+            $this->cities_win_dt2    = new DateTime($this->cities_win_dt);
+            // capture date from now, DateInterval type
+            $now = new DateTime("now");
+            $this->cities_win_dt2_iv = $now->diff($this->cities_win_dt2);
+            $this->cities_win_dt2  = "";
+            if ($this->cities_win_dt2_iv->d > 0)
+                $this->cities_win_dt2 .= $this->cities_win_dt2_iv->d . 'j ';
+            $this->cities_win_dt2 .= $this->cities_win_dt2_iv->h . 'h ';
+            $this->cities_win_dt2 .= $this->cities_win_dt2_iv->i . 'm ';
+            //var_dump($this->cities_win_dt2_iv);
         }
 
     }
