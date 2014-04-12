@@ -97,6 +97,9 @@
 
 
         // Création des markers
+        // Evenement au clic
+        var iw = new google.maps.InfoWindow();        
+
         {% for city in cities %}
         var marker{{ city.cities_id }} = new google.maps.Marker({
             position: new google.maps.LatLng({{ city.cities_lat }}, {{ city.cities_long }}),
@@ -113,11 +116,8 @@
                 icon: image_city_win,
                 zIndex: 1
             {% endif %}
-
-
         });
 
-        // Evenement au clic
         google.maps.event.addListener(marker{{ city.cities_id }}, 'click', function() {
             $(this).load("cityInfo.php?city={{ city.cities_id }}");
             // Make an AJAX request to get the data  
@@ -126,7 +126,7 @@
                 url: 'cityInfo.php?city={{ city.cities_id }}',  
                 success: function(data) {  
                     iw.setContent(data);  
-                    iw.open(map, marker);  
+                    iw.open(map, marker{{ city.cities_id }});  
                 }  
             });             
         });
