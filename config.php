@@ -1,6 +1,8 @@
 <?php
 #    define('MYSQL_DB','dattle');
 include ('classes/question.class.php');
+include ('classes/user.class.php');
+
 
 include('db.php');
 try {
