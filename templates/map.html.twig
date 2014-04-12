@@ -1,7 +1,4 @@
 
-<style type="text/css">
-    #map-canvas { height: 100% }
-</style>
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0FdPMBcYeAaoQiW18vPbgiiRpae_ENbo&sensor=true">
 </script>
@@ -122,7 +119,7 @@
 
         // Evenement au clic
         google.maps.event.addListener(marker{{ city.cities_id }}, 'click', function() {
-            // TODO JS AJAX TOUSSA TOUSSA => cityInfo.php?city={{ city.cities_id }}
+            $(this).load("cityInfo.php?city={{ city.cities_id }}");
         });
         {% endfor %}
     }

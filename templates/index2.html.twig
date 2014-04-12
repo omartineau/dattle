@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dattle - Jouez avec l'OpenData</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">        
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0FdPMBcYeAaoQiW18vPbgiiRpae_ENbo&sensor=true"></script>        
+    <script type="text/javascript">
+      function initialize() {
+
+// Create an array of styles.
+var styles = [
+{
+"featureType": "road",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "poi",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "water",
+"elementType": "labels",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "water",
+"elementType": "geometry.fill",
+"stylers": [
+{ "color": "#1e1e1e" }
+]
+},{
+"featureType": "transit",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "administrative",
+"elementType": "labels",
+"stylers": [
+{ "color": "#808080" },
+{ "visibility": "off" }
+]
+},{
+},{
+"featureType": "landscape",
+"stylers": [
+{ "color": "#ececec" }
+]
+},{
+"featureType": "landscape.man_made",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "landscape.natural.terrain",
+"stylers": [
+{ "visibility": "off" }
+]
+},{
+"featureType": "landscape.natural.terrain",
+"stylers": [
+{ "visibility": "off" }
+]
+}
+];
+
+// Create a new StyledMapType object, passing it the array of styles,
+// as well as the name to be displayed on the map type control.
+var styledMap = new google.maps.StyledMapType(styles,
+{name: "Styled Map"});
+
+// Create a map object, and include the MapTypeId to add
+// to the map type control.
+var mapOptions = {
+zoom: 10,
+streetViewControl: false,
+panControl: false,
+mapTypeControl: false,
+center: new google.maps.LatLng(49.672325, 0.782541),
+mapTypeControlOptions: {
+mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+}
+};
+var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+
+//Associate the styled map with the MapTypeId and set it to display.
+map.mapTypes.set('map_style', styledMap);
+map.setMapTypeId('map_style');
+
+/*var ctaLayer = new google.maps.KmlLayer({
+url: 'http://www.mathieulanglois.com/76-Seine-Maritime.kml'
+});
+ctaLayer.setMap(map);*/
+
+
+var img_win = new google.maps.MarkerImage("../img/gmap_marker_city_win.png", null, null, null, new google.maps.Size(40,40));
+var img_free = new google.maps.MarkerImage("../img/gmap_marker_city_free.png", null, null, null, new google.maps.Size(40,40));
+var img_mine = new google.maps.MarkerImage("../img/gmap_marker_city_mine.png", null, null, null, new google.maps.Size(40,40));
+
+// Création des markers
+var marker1 = new google.maps.Marker({
+       position: new google.maps.LatLng(49.8522948,1.2919694),
+       map: map,
+       cursor: "pointer",
+       title:"Notre Dame d'Aliermont",
+       icon: img_free
+   });
+  
+   // Evenement au clic
+   google.maps.event.addListener(marker1, 'click', function() {
+   alert("pout");
+   /*$("#overlay").attr("src","<?php the_permalink(); ?>");
+$("#loading").fadeIn();
+$("#overlay").load(function (){
+$("#loading").fadeOut();
+$("#overlay").fadeIn();
+$("#close").fadeIn();
+});*/
+});
+
+
+
+}
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="wrapper">
+
+            <div id="header">
+
+                <div id="logo">
+                    <a href="./"><img src="img/logo_dattle.png" /></a>
+                </div>
+
+                <div id="status">
+
+                    <ul id="stats">
+                        <li id="user_nicename"><i class="fa fa-user"></i> {{ user_nicename }}</li>
+                        <li id="user_attacks">{{ attacks }} tour{% if attacks > 1 %}s{% endif %} <br /><span>restant{% if attacks > 1 %}s{% endif %}</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="map-canvas" class="flexible-container">
+               <!-- <iframe width="" height="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=0.918731689453125%2C49.37276109846143%2C1.3018798828125%2C49.50537018717021&amp;layer=mapnik&amp;marker=49.43911046576162%2C1.1103057861328125"></iframe> -->
+            </div>
+
+            <div id="timeline">
+
+                <ul id="activity">
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+
+        <script src="js/main.js"></script>
+    </body>
+</html>

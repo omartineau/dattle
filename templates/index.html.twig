@@ -1,18 +1,93 @@
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dattle - Jouez avec l'OpenData</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">        
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
         {% include "map.html.twig" %}
     </head>
 
     <body>
-        <div id="login">
-        {% include "login.html.twig" %}
+        <div id="wrapper">
+
+            <div id="header">
+
+                <div id="logo">
+                    <a href="./"><img src="img/logo_dattle.png" /></a>
+                    <span id="question"><a href="./a-propos.php"><img src="img/icon_question.png"></a></span>
+                </div>
+
+                <div id="status">
+
+                    <ul id="stats">
+                    	{% if user.logged %}
+                        <li id="user_nicename"><i class="fa fa-user"></i> {{ user.users_pseudo }}</li>
+                        {% endif %}
+                        <li id="user_attacks">{{ attacks }} tour{% if attacks > 1 %}s{% endif %} <br /><span>restant{% if attacks > 1 %}s{% endif %}</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="timeline">
+
+                <ul id="activity">
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                    <li class="activity_card">
+                        <span class="activity_indicator"></span>
+                        <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                        <span class="activity_city">ROUEN !</span>
+                    </li>
+                </ul>
+            </div>
+	
+			<div id="map-canvas" class="flexible-container"/>
+
         </div>
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
-
-        <div id="map-canvas"/>
-
-
-
+        <script src="js/main.js"></script>
     </body>
 </html>

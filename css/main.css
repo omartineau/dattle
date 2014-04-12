@@ -1,0 +1,329 @@
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+
+/* global box-sizing */
+*,
+*:after,
+*:before {
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-font-smoothing:antialiased;
+    font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+}
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: 'dinL', Arial, sans-serif;
+}
+
+body {
+    background: #2c2c2c;
+    color:#fff;
+}
+
+/* clear */
+.clear:before,
+.clear:after {
+    content:' ';
+    display:table;
+}
+
+.clear:after {
+    clear:both;
+}
+.clear {
+    *zoom:1;
+}
+img {
+    /*max-width:100%;*/
+    height: auto;
+    vertical-align:bottom;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+a {
+    color:#e99533;
+    text-decoration:none;
+}
+a:hover {
+    color:#e99533;
+}
+a:focus {
+    outline:0;
+}
+a:hover,
+a:active {
+    outline:0;
+}
+input:focus {
+    outline:0;
+}
+.flexible-container {
+    position: relative;
+    /*padding-bottom: 56.25%;
+    padding-top: 30px;*/
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+.flexible-container iframe,   
+.flexible-container object,  
+.flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*------------------------------------*\
+    STRUCTURE
+\*------------------------------------*/
+
+html,
+body {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+/*------------------------------------*\
+    PAGES
+\*------------------------------------*/
+
+#wrapper, #map-canvas {
+    height:100%;
+}
+#map-canvas {
+    background: #ececec;    
+}
+#header {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:5;
+    padding: 35px 35px 0 35px;
+}
+#logo {
+    float:left;
+}
+#question {
+    margin:15px 0 0 10px;
+    display:block;
+    clear:both;
+}
+#status {
+    float:right;
+}
+#status #stats {
+    margin:0;
+    padding:0;
+}
+#status #stats li {
+    margin: 0 0 0 5px;
+    padding: 5px 8px;
+    height:30px;
+    float:left;
+    display: block;
+    border:1px solid #eee;
+    -khtml-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    list-style: none outside none;
+}
+#status #stats li#user_nicename {
+    color:#b6b6b6;
+    border-color:#b6b6b6;
+}
+#status #stats li#user_attacks {
+    padding: 3px 8px;
+    height:30px;
+
+    font-size: 0.75em;
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#d01c8b;    
+    border-color:#d01c8b;
+    font-family: 'dinM', Arial, sans-serif;    
+}
+#status #stats li#user_attacks span {
+    color:#bbb;    
+    clear:left;
+}
+
+#timeline {
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:100;
+    height:120px;
+    padding: 0 180px 0 165px;
+    background-color: #272727;
+    background-image: url('../img/logo_dattle-live.png'), url('../img/logo_seine-maritime.png');
+    background-position: 35px 40px, bottom right;
+    background-repeat: no-repeat;
+}
+#activity {
+    margin: 15px 0;
+    float:left;
+    list-style: none outside none;
+}
+#activity .activity_card {
+    position: relative;
+    margin-left:15px;
+    height: 90px;
+    padding: 15px;
+    font-size: 0.9em;
+    text-align: center;
+    display: inline-block;
+    border:1px solid #343434;
+    -khtml-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+}
+
+#activity .activity_indicator {
+   position: absolute;
+   top:0;
+   left:0;
+   margin-left:-9px;
+   margin-top:-9px;
+   display: block;
+   width:18px;
+   height:18px;
+   background: transparent url('../img/icon_activity.png') center center no-repeat;
+}
+.activity_card .activity_user,
+.activity_card .activity_line,
+.activity_card .activity_city {
+    display: block;
+    color:#d6d6d6;
+}
+.activity_card .activity_user,
+.activity_card .activity_city {
+    text-transform: uppercase;
+}
+.activity_card .activity_user {
+    color:#e98e33;
+}
+.activity_card .activity_city {
+    color:#d01c8b;
+}
+
+
+/*------------------------------------*\
+    IMAGES
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    TYPOGRAPHY
+\*------------------------------------*/
+
+@font-face{
+font-family:"dinB";
+src:url("../fonts/b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot?#iefix");
+src:url("../fonts/b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot?#iefix") format("eot"),url("../fonts/9949035f-6226-4080-a14a-bf7d94ffb1e1.woff") format("woff"),url("../fonts/6241bd09-15c2-485e-9796-9db8d0aa6974.ttf") format("truetype"),url("../fonts/af94da3e-4232-416a-b6bc-f39f85dd5db6.svg#af94da3e-4232-416a-b6bc-f39f85dd5db6") format("svg");
+}
+@font-face{
+font-family:"dinL";
+src:url("../fonts/3e0b2cd7-9657-438b-b4af-e04122e8f1f7.eot?#iefix");
+src:url("../fonts/3e0b2cd7-9657-438b-b4af-e04122e8f1f7.eot?#iefix") format("eot"),url("../fonts/bc176270-17fa-4c78-a343-9fe52824e501.woff") format("woff"),url("../fonts/3516f91d-ac48-42cd-acfe-1be691152cc4.ttf") format("truetype"),url("../fonts/d1b1e866-a411-42ba-8f75-72bf28e23694.svg#d1b1e866-a411-42ba-8f75-72bf28e23694") format("svg");
+}
+@font-face{
+font-family:"dinM";
+src:url("../fonts/324dee78-6585-4c13-8ca3-5817cc600d84.eot?#iefix");
+src:url("../fonts/324dee78-6585-4c13-8ca3-5817cc600d84.eot?#iefix") format("eot"),url("../fonts/4bf0ead4-e61b-4992-832b-6ff05828d99f.woff") format("woff"),url("../fonts/73713a0b-8f6a-4c4e-b8a8-7cf238e632f6.ttf") format("truetype"),url("../fonts/b90b6bdf-15e2-4544-9fe0-92c79fff0ecd.svg#b90b6bdf-15e2-4544-9fe0-92c79fff0ecd") format("svg");
+}
+@font-face{
+font-family:"dinR";
+src:url("../fonts/da088ecc-a53c-4831-a95b-6fd81b5b338a.eot?#iefix");
+src:url("../fonts/da088ecc-a53c-4831-a95b-6fd81b5b338a.eot?#iefix") format("eot"),url("../fonts/c5a7f89e-15b6-49a9-8259-5ea665e72191.woff") format("woff"),url("../fonts/868c94b5-ca49-46b7-b62b-297f8d861125.ttf") format("truetype"),url("../fonts/e3145f65-29b5-4f7f-8c6e-2dc135021b6a.svg#e3145f65-29b5-4f7f-8c6e-2dc135021b6a") format("svg");
+}
+
+
+/*------------------------------------*\
+    RESPONSIVE
+\*------------------------------------*/
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 48em) {
+
+
+}
+
+/*
+ * -- DESKTOP (AND UP) MEDIA QUERIES --
+ * On desktops and other large devices, we want to over-ride some
+ * of the mobile and tablet styles.
+ */
+@media (min-width: 78em) {
+
+
+}
+
+/*
+@media only screen and (min-width:320px) {
+
+}
+@media only screen and (min-width:480px) {
+
+}
+@media only screen and (min-width:768px) {
+
+}
+@media only screen and (min-width:1024px) {
+
+}
+@media only screen and (min-width:1140px) {
+
+}
+@media only screen and (min-width:1280px) {
+
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),
+       only screen and (min-resolution:144dpi) {
+
+}
+*/
+
+/*------------------------------------*\
+    MISC
+\*------------------------------------*/
+
+::selection {
+    background:#2d2d2d;
+    color:#FFF;
+    text-shadow:none;
+}
+::-webkit-selection {
+    background:#2d2d2d;
+    color:#FFF;
+    text-shadow:none;
+}
+::-moz-selection {
+    background:#2d2d2d;
+    color:#FFF;
+    text-shadow:none;
+}
