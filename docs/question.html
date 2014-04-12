@@ -126,6 +126,8 @@
 		
 			margin: 0px 10px;
 			padding: 0px;
+			
+			text-align: center;
 		
 		}
 		
@@ -134,16 +136,18 @@
 			margin: 0px;
 			padding: 0px;
 			list-style: none;
+			
+			display: inline-block;
 		
 		}
 		
 		.answers li a {
 		
-			float: left;
+			
 			
 			display: block;
 			width: 220px;
-			padding: 10px 0px 10px 10px;
+			padding: 10px 0px 10px 0px;
 			margin-left: 10px;
 			
 			text-align: center;
@@ -164,6 +168,40 @@
 		
 			color: #e99533;
 			border-color: #e99533;
+		
+		}
+		
+		.answers input {
+		
+			padding: 10px;
+			width: 300px;
+		
+			font-family: dinL;
+			font-size: 15px;
+			color: #ababab;
+			text-transform: uppercase;
+			text-decoration: none;
+		
+			border: 1px solid #313131;
+			background: none;
+			
+			border-radius: 5px;
+		
+		}
+		
+		.answers input.submit {
+		
+			width: auto;
+			
+			background: #d01c8b;
+			border: 0px;
+		
+		}
+		
+		.answers input:focus {
+			
+			outline: 0px;
+			border-color: #d01c8b;
 		
 		}
 		
@@ -274,11 +312,18 @@
 	        	<h2>Quelle est la ville la plus peuplée de ces trois communes Seino-marines ?</h2>
 	        </div>
 	        
-	        <ul class="answers">
+	        <!--<ul class="answers">
 	        	<li><a href="#">Rouen</a></li>
 	        	<li><a href="#" class="active">Le Havre</a></li>
 	        	<li><a href="#">Criquetot</a></li>
-	        </ul>
+	        </ul>-->
+	        
+	        <div class="answers">
+	        
+	        	<input type="text" placeholder="Votre réponse" />
+	        	<input type="submit" class="submit" value="OK" />
+	        	
+	        </div>
 	        
 	        <div class="clear"></div>
 	        
