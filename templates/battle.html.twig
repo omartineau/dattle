@@ -1,61 +1,253 @@
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <title>Battle pour </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Dattle - Jouez avec l'OpenData</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/question.css">
+
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
 </head>
-<body>
 
-{% if objectif.ville_win == false %}
+<body class="gradient">
+<div id="wrapper">
 
-<div id="numquestion">Numero de la question {{ objectif.num_quest }}/{{ objectif.nb_total_quest }}
-    {% if objectif.nb_quest_restant %}
-    <br/>
-Nombre de question restante {{ objectif.nb_quest_restant }}</div>
-    {% endif %}
-{% endif %}
+    <div id="header">
 
-{% if objectif.question_win %}
-<div id="resultatquestion">
-      La précédente réponse était juste
-</div>
-{% endif %}
+        <div id="logo">
+            <a href="index.php"><img src="img/logo_dattle_white.png" /></a>
+            <span id="question"><a href="a-propos.php"><img src="img/icon_question_white.png"></a></span>
+        </div>
+
+        <div id="status">
+
+            <ul id="stats">
+                {% if user.logged %}
+                    <li id="user_nicename"><i class="fa fa-user"></i> {{ user.users_pseudo }}</li>
+                {% endif %}
+                <li id="user_attacks">{{ user.users_round_avail }} tour{% if user.users_round_avail > 1 %}s{% endif %} <br /><span>restant{% if user.users_round_avail > 1 %}s{% endif %}</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="timeline">
+
+        <ul id="activity">
+            <li class="activity_card">
+                <span class="activity_indicator"></span>
+                <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                <span class="activity_city">ROUEN !</span>
+            </li>
+            <li class="activity_card">
+                <span class="activity_indicator"></span>
+                <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                <span class="activity_city">ROUEN !</span>
+            </li>
+            <li class="activity_card">
+                <span class="activity_indicator"></span>
+                <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                <span class="activity_city">ROUEN !</span>
+            </li>
+            <li class="activity_card">
+                <span class="activity_indicator"></span>
+                <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                <span class="activity_city">ROUEN !</span>
+            </li>
+            <li class="activity_card">
+                <span class="activity_indicator"></span>
+                <span class="activity_user">John Doe</span>
+                        <span class="activity_liner">est devenu citoyen<br>
+                        d'honneur de la ville de</span>
+                <span class="activity_city">ROUEN !</span>
+            </li>
+        </ul>
+    </div>
 
 
 
-{% if objectif.fini == true %}
-<div id="resultatbattle">
-    Fini le compte du score.... Alors, êtes vous devenu Citoyen d'honneur ou pas ? <br/>
-    {% if objectif.ville_win == true %}
-        BRAVO
-    {% else %}
-        NON DESOLE
-    {% endif %}
-</div>
-{% endif %}
 
-{% if objectif.fini == false %}
-<form method="POST">
-<div id="question">
-    <strong>{{ q.questions_text }}</strong><br/>
-    {% if q.questions_type == "VALUE" %}
-        <input name='replyvalue'/>
-    {% endif %}
+    <div class="question">
 
-    {% if q.questions_type == "QCM" %}
-        <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_1 }}<br>
-        <input type="radio" name="replyqcm" value="2">{{ q.questions_resp_2 }}<br>
-        {% if q.questions_resp_3 %}
-            <input type="radio" name="replyqcm" value="3">{{ q.questions_resp_3 }}<br>
+        {% if objectif.fini == true %}
+
+            <hgroup>
+                <h1>Ville de {{ city.cities_name }}</h1>
+                <div class="clear"></div>
+            </hgroup>
+
+            <div class="contentText">
+            {% if objectif.ville_win == true %}
+                <h3>BRAVO !</h3>
+                <h2>Devenez citoyen d'honneur d'autres villes pour être le plus respecté des seino-marins</h2>
+            {% else %}
+                <h3>PERDU...</h3>
+                <h2>Ça ne sera pas pour cette fois, retentez votre chance sur cette ville ou une autre</h2>
+            {% endif %}
+            </div>
+            <p style="text-align: center"><a class="pure-button" style="background-color: #d41e95; color: #FFFFFF" href="index.php">Retourner sur la carte</a></p>
+
+        {% else %}
+            <hgroup>
+                <h1>Ville de {{ city.cities_name }}</h1>
+                {% if city.users_id %}
+                <h3>Actuellement, <strong>{{ owner.users_pseudo }}</strong> est le citoyen d’honneur de cette ville</h3>
+                {% endif %}
+                <div class="clear"></div>
+            </hgroup>
+
+            <div class="contentText">
+                <div class="timer">
+                    {% include 'timer.html.twig' %}
+                </div>
+                <h3>Question {{ objectif.num_quest }} / {{ objectif.nb_total_quest }}</h3>
+                <h2>{{ q.questions_text }}</h2>
+
+                </form>
+
+            </div>
+
+            {% if q.questions_type == "QCM" %}
+                <ul class="answers">
+                    <li><a href="#" id="answer1" >{{ q.questions_resp_1 }}</a></li>
+                    <li><a href="#" id="answer2" >{{ q.questions_resp_2 }}</a></li>
+                    {% if q.questions_resp_3 %}
+                    <li><a href="#" id="answer3" >{{ q.questions_resp_3 }}</a></li>
+                    {% endif %}
+                </ul>
+
+                <form id="questionForm" method="POST">
+                    <input type="hidden" name="replyqcm" id="replyqcm" value="" />
+                </form>
+
+            {% elseif q.questions_type == "VALUE" %}
+                <div class="answers">
+                    <form id="questionForm" method="POST">
+                        <input type="text" name='replyvalue' placeholder="Votre réponse" />
+                        <input type="submit" class="submit" value="OK" />
+                    </form>
+                </div>
+
+            {% endif %}
+
+
+            <div class="progress">
+                <h1>Votre progression : {{ objectif.score }}</h1>
+                <div class="progressBar">
+                    <div class="bar"></div>
+                    <div class="target"><span>Score à battre</span></div>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+<!--
+    {% if objectif.ville_win == false %}
+
+        <div id="numquestion">Numero de la question {{ objectif.num_quest }}/{{ objectif.nb_total_quest }}
+        {% if objectif.nb_quest_restant %}
+            <br/>
+            Nombre de question restante {{ objectif.nb_quest_restant }}</div>
         {% endif %}
     {% endif %}
 
-    <INPUT TYPE="submit" VALUE="Enregistrer la réponse">
+    {% if objectif.question_win %}
+        <div id="resultatquestion">
+            La précédente réponse était juste
+        </div>
+    {% endif %}
+
+
+
+    {% if objectif.fini == true %}
+        <div id="resultatbattle">
+            Fini le compte du score.... Alors, êtes vous devenu Citoyen d'honneur ou pas ? <br/>
+            {% if objectif.ville_win == true %}
+                BRAVO
+            {% else %}
+                NON DESOLE
+            {% endif %}
+        </div>
+    {% else %}
+        <form method="POST">
+            <div id="question">
+                <strong>{{ q.questions_text }}</strong><br/>
+                {% if q.questions_type == "VALUE" %}
+                    <input name='replyvalue'/>
+                {% endif %}
+
+                {% if q.questions_type == "QCM" %}
+                    <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_1 }}<br>
+                    <input type="radio" name="replyqcm" value="2">{{ q.questions_resp_2 }}<br>
+                    {% if q.questions_resp_3 %}
+                        <input type="radio" name="replyqcm" value="3">{{ q.questions_resp_3 }}<br>
+                    {% endif %}
+                {% endif %}
+
+                <INPUT TYPE="submit" VALUE="Enregistrer la réponse">
+            </div>
+        </form>
+
+
+        <div id="avance">Avancée : {{ objectif.pourcent }}%<br/>
+            Score actuel {{ objectif.score }} / Cible {{ objectif.palier }}</div>
+    {% endif %}
+    -->
+
 </div>
-</form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+
+<script src="js/main.js"></script>
+<script src="js/jquery.timer.js"></script>
+<script>
+    $(function($) {
+
+        var $countdown = $("#countdown");
+
+        $countdown.timer();
+
+        $countdown.trigger('configure', {
+
+            finish : function (value) {
+
+                $('form#questionForm').submit();
+            }
+
+        }).trigger('start');
+    });
+
+    $('.bar').width({{ objectif.score }});
+    $('.target').css('left', {{ objectif.palier }} * 744 / ({{ objectif.nb_total_quest }}*20) );
 
 
-<div id="avance">Avancée : {{ objectif.pourcent }}%<br/>
-Score actuel {{ objectif.score }} / Cible {{ objectif.palier }}</div>
-{% endif %}
+    $('#answer1').click(function() { $('input#replyqcm').val('1'); $('form#questionForm').submit(); return false; });
+    $('#answer2').click(function() { $('input#replyqcm').val('2'); $('form#questionForm').submit(); return false; });
+    $('#answer3').click(function() { $('input#replyqcm').val('3'); $('form#questionForm').submit(); return false; });
+
+
+</script>
 
 </body>
 </html>
+

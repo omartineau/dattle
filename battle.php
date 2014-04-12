@@ -1,13 +1,6 @@
 <?php
 include('includes/config.php');
 
-
-#patch autolog
-if (!$_SESSION['user']->users_id) {
-    echo "No";
-    $_SESSION['user'] = new User(1);
-}
-
 $tpl = array();
 
 # initialisation du questionnaire
@@ -134,6 +127,9 @@ if (empty($_SESSION['questions'])) {
 }
 
 $tpl['q']=$q;
+
+$tpl['city']  = $_SESSION['city'];
+$tpl['owner'] = new User($_SESSION['city']->users_id);
 
 
 $template = $twig->loadTemplate('battle.html.twig');
