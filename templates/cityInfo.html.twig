@@ -13,14 +13,14 @@
         Depuis {{ city.cities_win_dt2 }}</p>
         <p>Son score : {{ city.cities_win_score }} points<br>
         Nombre de questions : {{ questions }}</p>
-        <p><em>Pour prendre son titre vous devez <br>le défier et réaliser un meilleur score</em>
+        <p><em>Pour prendre son titre <br>vous devrez faire mieux !</em>
         {% if user.logged %}
             <br><a href="battle.php?city={{ city.cities_id }}" class="pure-button pure-button-active">Tenter ma chance</a>
         {% endif %}</p>
 
     {% else %}
         <p style="padding:0"><img src="img/icon_bubble-plus.png" border="0"></p>
-        <p class="city_header"><strong>Cette ville est libre, <br>assiégez-la !</strong><br>
+        <p class="city_header"><strong>{{ city.cities_name }} n'a pas encore de <br>citoyen d'honneur !</strong><br>
         Score à atteindre : {{ city.cities_win_score }} points</p>
         <p>Nombre de questions : {{ questions }}<br><br>
         <em>Pour gagner cette ville vous devez <br>engranger le plus de points</em>
