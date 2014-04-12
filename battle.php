@@ -14,6 +14,7 @@ if (!empty($_GET['city']) && !isset($_SESSION['questions']) ) {
         die ('Classe de la ville inconu');
     }
     $_SESSION['questions'] = Question::getQuestions($city->cities_id,$city_questions_count[$city->cities_class]);
+    var_dump($_SESSION['questions']);
     $_SESSION['nb_questions'] = $city_questions_count[$city->cities_class];
     $_SESSION['score'] = 0;
     $_SESSION['score_cible'] = ($city->cities_win_score?$city->cities_win_score:50);

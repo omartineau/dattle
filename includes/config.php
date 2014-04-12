@@ -13,7 +13,8 @@ include('classes/user.class.php');
 # DB
 include('includes/db.php');
 try {
-    $con = new PDO( 'mysql:host='.MYSQL_HOST.';dbname='.MYSQL_DB.';port='.MYSQL_PORT.';', MYSQL_USER, MYSQL_PASS );
+    $con = new PDO( 'mysql:host='.MYSQL_HOST.';dbname='.MYSQL_DB.';port='.MYSQL_PORT.';charset=utf8;', MYSQL_USER, MYSQL_PASS );
+    $con->exec('SET NAMES utf8');
 } catch ( Exception $e ) {
     echo "Connection à MySQL impossible : ", $e->getMessage();
     die();
