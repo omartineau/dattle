@@ -1,33 +1,31 @@
-
-
-<div id="cityinfo">
+<div class="cityinfo">
     {% if cityOwned %}
-        Vous êtes le citoyen d'honneur de {{ city.cities_name }}<br/>
-        Depuis {{ city.cities_win_dt2 }}<br/>
-        Votre score : {{ city.cities_win_score }} points <br/>
-        Nombre de questions : {{ questions }} <br/>
-        Vous perdez votre titre si bla bla bla<br/>
+        <p style="padding:0"><img src="img/icon_bubble-key.png" border="0"></p>
+        <p class="city_header"><strong>Vous êtes le citoyen d'honneur <br>de {{ city.cities_name }}</strong><br>
+        Depuis {{ city.cities_win_dt2 }}</p>
+        <p>Votre score : {{ city.cities_win_score }} points<br><br>
+        Nombre de questions : {{ questions }}</p>
+        <p><em>Vous perdrez votre titre <br>si un concurrent vous défie</em></p>
 
     {% elseif cityFree %}
-        {{ owner.users_pseudo }} est le citoyen d'honneur de {{ city.cities_name }}<br/>
-        Depuis {{ city.cities_win_dt2 }}<br/>
-        Son score : {{ city.cities_win_score }} points <br/>
-        Nombre de questions : {{ questions }} <br/>
-        Pour prendre son titre vous devez bla bla bla <br/>
+        <p style="padding:0"><img src="img/icon_bubble-key.png" border="0"></p>
+        <p class="city_header"><strong>{{ owner.users_pseudo }} est le citoyen d'honneur <br>de {{ city.cities_name }}</strong><br>
+        Depuis {{ city.cities_win_dt2 }}</p>
+        <p>Son score : {{ city.cities_win_score }} points<br>
+        Nombre de questions : {{ questions }}</p>
+        <p><em>Pour prendre son titre vous devez <br>le défier et réaliser un meilleur score</em>
         {% if user.logged %}
-            <a href="battle.php?city={{ city.cities_id }}">Tenter ma chance</a>
-        {% endif %}
+            <br><a href="battle.php?city={{ city.cities_id }}" class="pure-button pure-button-active">Tenter ma chance</a>
+        {% endif %}</p>
 
     {% else %}
-        Cette ville est libre, assiégez-la ! <br/>
-        Score à faire : {{ city.cities_win_score }} points <br/>
-        Nombre de questions : {{ questions }} <br/>
-        Pour gagner cette ville vous devez bla bla bla <br/>
+        <p style="padding:0"><img src="img/icon_bubble-plus.png" border="0"></p>
+        <p class="city_header"><strong>Cette ville est libre, <br>assiégez-la !</strong><br>
+        Score à atteindre : {{ city.cities_win_score }} points</p>
+        <p>Nombre de questions : {{ questions }}<br><br>
+        <em>Pour gagner cette ville vous devez <br>engranger le plus de points</em>
         {% if user.logged %}
-            <a href="battle.php?city={{ city.cities_id }}">Tenter ma chance</a>
-        {% endif %}
+           <br><a href="battle.php?city={{ city.cities_id }}" class="pure-button pure-button-active">Tenter ma chance</a>
+        {% endif %}</p>
     {% endif %}
-
-
 </div>
-

@@ -107,6 +107,37 @@ body {
 #map-canvas {
     background: #ececec;    
 }
+.cityinfo{
+    background: #fff;  
+    color:#272727; 
+    min-width: 300px;
+    padding-left:15px;
+}
+.cityinfo img{
+    margin: 0 auto;
+}
+.cityinfo p {
+    padding:15px 0;
+    margin:0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.cityinfo p.city_header {
+    border-bottom:1px solid #666666;
+}
+.cityinfo p strong {
+    color:#e99533;
+    font-size: 1.20em;
+    font-family: 'dinM', Arial, sans-serif;
+}
+.cityinfo .pure-button {
+    margin-top: 15px;    
+    color:#fff;
+    font-size: 1em;
+    width:100%;
+    font-family: 'dinM', Arial, sans-serif;
+    background-color:#d41e95;
+}
 #header {
     position: absolute;
     top:0;
@@ -126,6 +157,15 @@ body {
 #status {
     float:right;
 }
+#status .pure-form input {
+    font-family: 'dinL', Arial, sans-serif !important;
+}
+#status .pure-form .pure-button {
+    color:#fff;
+    text-transform: uppercase;
+    background-color:#d41e95;
+}
+.pure-form input[type="email"]:focus, .pure-form input[type="password"]:focus {border-color:#d41e95 !important;}
 #status #stats {
     margin:0;
     padding:0;
@@ -201,7 +241,7 @@ body {
 }
 #activity .activity_card {
     position: relative;
-    margin-left:15px;
+    margin-left:10px;
     height: 90px;
     padding: 15px;
     font-size: 0.9em;
@@ -214,7 +254,6 @@ body {
     border-radius: 3px;
 
 }
-
 #activity .activity_indicator {
    position: absolute;
    top:0;

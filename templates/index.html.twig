@@ -25,18 +25,26 @@
             <div id="header">
 
                 <div id="logo">
-                    <a href="./"><img src="img/logo_dattle.png" /></a>
-                    <span id="question"><a href="./a-propos.php"><img src="img/icon_question.png"></a></span>
+                    <a href="/"><img src="img/logo_dattle.png" /></a>
+                    <span id="question"><a href="#"><img src="img/icon_question.png"></a></span>
                 </div>
 
                 <div id="status">
 
-                    <ul id="stats">
-                    	{% if user.logged %}
-                        <li id="user_nicename"><i class="fa fa-user"></i> {{ user.users_pseudo }}</li>
-                        {% endif %}
-                        <li id="user_attacks">{{ attacks }} tour{% if attacks > 1 %}s{% endif %} <br /><span>restant{% if attacks > 1 %}s{% endif %}</span></li>
-                    </ul>
+					{% if user.logged %}
+	                    <ul id="stats">
+							<li id="user_nicename"><i class="fa fa-user"></i> {{ user.users_pseudo }}</li>
+							<li id="user_attacks">{{ user.user_round_avail }} tour{% if user.user_round_avail > 1 %}s{% endif %} <br /><span>restant{% if user.user_round_avail > 1 %}s{% endif %}</span></li>
+	                    </ul>
+					{% else %}
+						<form class="pure-form" method="POST" action="login.php">
+						    <fieldset>
+						        <input name="email" type="email" placeholder="Email">
+						        <input name="password" type="password" placeholder="Password">
+						        <button type="submit" class="pure-button pure-button-primary pure-button-active">login</button>
+						    </fieldset>
+						</form>
+					{% endif %}
                 </div>
             </div>
 
@@ -45,38 +53,38 @@
                 <ul id="activity">
                     <li class="activity_card">
                         <span class="activity_indicator"></span>
-                        <span class="activity_user">John Doe</span>
+                        <span class="activity_user">Olivier Martineau</span>
                         <span class="activity_liner">est devenu citoyen<br>
                         d'honneur de la ville de</span>
                         <span class="activity_city">ROUEN !</span>
                     </li>
                     <li class="activity_card">
                         <span class="activity_indicator"></span>
-                        <span class="activity_user">John Doe</span>
+                        <span class="activity_user">Sandrine Bezace</span>
                         <span class="activity_liner">est devenu citoyen<br>
                         d'honneur de la ville de</span>
-                        <span class="activity_city">ROUEN !</span>
+                        <span class="activity_city">HENOUVILLE !</span>
                     </li>
                     <li class="activity_card">
                         <span class="activity_indicator"></span>
-                        <span class="activity_user">John Doe</span>
+                        <span class="activity_user">Simon Leboucher</span>
                         <span class="activity_liner">est devenu citoyen<br>
                         d'honneur de la ville de</span>
-                        <span class="activity_city">ROUEN !</span>
+                        <span class="activity_city">DIEPPE !</span>
                     </li>
                     <li class="activity_card">
                         <span class="activity_indicator"></span>
-                        <span class="activity_user">John Doe</span>
+                        <span class="activity_user">Aurore Delattre</span>
                         <span class="activity_liner">est devenu citoyen<br>
                         d'honneur de la ville de</span>
-                        <span class="activity_city">ROUEN !</span>
+                        <span class="activity_city">FECAMP !</span>
                     </li>
                     <li class="activity_card">
                         <span class="activity_indicator"></span>
-                        <span class="activity_user">John Doe</span>
+                        <span class="activity_user">François Hollande</span>
                         <span class="activity_liner">est devenu citoyen<br>
                         d'honneur de la ville de</span>
-                        <span class="activity_city">ROUEN !</span>
+                        <span class="activity_city">YVETOT !</span>
                     </li>
                 </ul>
             </div>
