@@ -7,7 +7,7 @@
         Votre score : {{ city.cities_win_score }} points <br/>
         Nombre de questions : {{ questions }} <br/>
         Vous perdez votre titre si bla bla bla<br/>
-        <a href="battle.php?city=".{{ city.cities_id }}>Tenter ma chance</a>
+        <a href="battle.php?city={{ city.cities_id }}">Tenter ma chance</a>
 
     {% elseif cityFree %}
         {{ owner.users_pseudo }} est le citoyen d'honneur de {{ city.cities_name }}<br/>
@@ -21,7 +21,7 @@
         Score à faire : {{ city.cities_win_score }} points <br/>
         Nombre de questions : {{ questions }} <br/>
         Pour gagner cette ville vous devez bla bla bla <br/>
-        <a href="battle.php?city=".{{ city.cities_id }}>Tenter ma chance</a>
+        <a href="battle.php?city={{ city.cities_id }}">Tenter ma chance</a>
 
     {% endif %}
 

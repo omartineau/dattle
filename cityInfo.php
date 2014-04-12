@@ -10,6 +10,7 @@ if (!empty($_GET['city']))
     $cityFree  = true;
     $city = new City($_GET['city']);
 
+var_dump($city);
 
     if ($city->users_id == 0)
     {
