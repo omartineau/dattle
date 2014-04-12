@@ -165,6 +165,22 @@ body {
     clear:left;
 }
 
+.gradient #status #stats li {
+
+	border-color: #fff;
+	
+}
+.gradient #status #stats li#user_nicename {
+	color: #fff;
+}
+.gradient #status #stats li#user_attacks {
+	color: #fff;
+	border-color: #6c0f48;
+}
+.gradient #status #stats li#user_attacks span {
+	color: #6c0f48;
+}
+
 #timeline {
     position: absolute;
     bottom:0;
