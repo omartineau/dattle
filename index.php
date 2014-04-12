@@ -6,7 +6,7 @@ $user = $_SESSION['user'];
 
 
 // cities list
-$cities = City::getAllCities(100);
+$cities = City::getAllCities(1000);
 
 $template = $twig->loadTemplate('index.html.twig');
 echo $template->render(array(

@@ -32,10 +32,12 @@ class City
             $this->cities_polulation = (int)$f->cities_polulation;
             $this->cities_win_score  = (int)$f->cities_win_score;
             $this->users_id          = (int)$f->users_id;
-            $this->cities_win_dt     = (int)$f->cities_win_dt;
+            $this->cities_win_dt     = $f->cities_win_dt;
 
             // capture date, DateInterval type
-            $this->cities_win_dt2    = new DateTime($this->cities_win_dt);
+            $this->cities_win_dt2    = ($this->cities_win_dt != null)
+                                     ? new DateTime($this->cities_win_dt)
+                                     : new DateTime("now");
             // capture date from now, DateInterval type
             $now = new DateTime("now");
             $this->cities_win_dt2_iv = $now->diff($this->cities_win_dt2);
@@ -48,6 +50,19 @@ class City
         }
 
     }
+
+    function capturedBy($users_id, $points)
+    {
+        global $con;
+        $query = $con->prepare("UPDATE cities SET
+            users_id = :users_id,
+            cities_win_score = :cities_win_score,
+            cities_win_dt = NOW()
+            WHERE cities_id = :cities_id");
+        $query->bindParam(':users_id', $users_id, PDO::PARAM_INT);
+        $query->bindParam(':cities_win_score', $points, PDO::PARAM_INT);
+    }
+
 
     // return cities for an user
     static function getUserCitiesId($users_id, $limit = 100)
@@ -72,7 +87,7 @@ class City
     {
         global $con;
 
-        $query = $con->prepare("SELECT cities_id FROM cities LIMIT :limit");
+        $query = $con->prepare("SELECT cities_id FROM cities ORDER BY cities_id LIMIT :limit");
         $query->bindParam(':limit', $limit, PDO::PARAM_INT);
 
         $query->execute();
