@@ -2,6 +2,8 @@
 header("Content-Type: text/html; charset=UTF-8");
 include ('classes/question.class.php');
 include ('classes/city.class.php');
+include ('classes/user.class.php');
+
 unset($_SESSION['time_debut_question']);
 
 session_start();
