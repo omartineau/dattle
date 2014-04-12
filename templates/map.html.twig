@@ -107,12 +107,17 @@
             cursor: "pointer",
             title:"{{ city.cities_name }}",
             {% if city.users_id == 0 %}
-                icon: image_city_free
+                icon: image_city_free,
+            zIndex: 0
             {% elseif city.users_id == user.users_id %}
-                icon: image_city_mine
+                icon: image_city_mine,
+                zIndex: 2
             {% else %}
-                icon: image_city_win
+                icon: image_city_win,
+                zIndex: 1
             {% endif %}
+
+
         });
 
         // Evenement au clic

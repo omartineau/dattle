@@ -70,7 +70,7 @@ class City
 
 
     // return cities for an user
-    static function getUserCitiesId($users_id, $limit = 100)
+    static function getUserCitiesId($users_id, $limit = 1000)
     {
         global $con;
 
@@ -88,11 +88,11 @@ class City
     }
 
     // return all cities
-    static function getAllCities($limit = 100)
+    static function getAllCities($limit = 1000)
     {
         global $con;
 
-        $query = $con->prepare("SELECT cities_id FROM cities ORDER BY cities_id LIMIT :limit");
+        $query = $con->prepare("SELECT cities_id FROM cities LIMIT :limit");
         $query->bindParam(':limit', $limit, PDO::PARAM_INT);
 
         $query->execute();
