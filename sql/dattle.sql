@@ -28,24 +28,24 @@ DROP TABLE IF EXISTS `attacks`;
 CREATE TABLE `attacks` (
   `attacks_id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `users_id` int(11) unsigned NOT NULL,
-  `citites_id` varchar(255) NOT NULL DEFAULT '',
+  `cities_id` varchar(255) NOT NULL DEFAULT '',
   `attacks_dt` datetime DEFAULT NULL,
   `attacks_win` int(1) DEFAULT NULL,
   `attacks_score` int(11) DEFAULT NULL,
   `opponent_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`attacks_id`),
-  KEY `citites_id` (`citites_id`),
+  KEY `cities_id` (`cities_id`),
   KEY `users_id` (`users_id`),
   KEY `opponent_id` (`opponent_id`),
   CONSTRAINT `attacks_ibfk_3` FOREIGN KEY (`opponent_id`) REFERENCES `users` (`users_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `attacks_ibfk_1` FOREIGN KEY (`citites_id`) REFERENCES `cities` (`cities_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `attacks_ibfk_1` FOREIGN KEY (`cities_id`) REFERENCES `cities` (`cities_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `attacks_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `attacks` WRITE;
 /*!40000 ALTER TABLE `attacks` DISABLE KEYS */;
 
-INSERT INTO `attacks` (`attacks_id`, `users_id`, `citites_id`, `attacks_dt`, `attacks_win`, `attacks_score`, `opponent_id`)
+INSERT INTO `attacks` (`attacks_id`, `users_id`, `cities_id`, `attacks_dt`, `attacks_win`, `attacks_score`, `opponent_id`)
 VALUES
 	(2,1,'ROUEN','2014-04-11 23:40:00',0,200,NULL);
 
@@ -60,11 +60,11 @@ DROP TABLE IF EXISTS `cities`;
 
 CREATE TABLE `cities` (
   `cities_id` varchar(255) NOT NULL DEFAULT '',
-  `citites_name` varchar(512) NOT NULL DEFAULT '',
-  `citites_class` varchar(256) DEFAULT NULL,
+  `cities_name` varchar(512) NOT NULL DEFAULT '',
+  `cities_class` varchar(256) DEFAULT NULL,
   `cities_caton` varchar(256) DEFAULT NULL,
   `cities_kml` text,
-  `cities_polulation` bigint(20) DEFAULT NULL,
+  `cities_population` bigint(20) DEFAULT NULL,
   `cities_win_score` int(11) DEFAULT NULL,
   `users_id` int(11) unsigned DEFAULT NULL,
   `cities_win_dt` datetime DEFAULT NULL,
@@ -76,9 +76,9 @@ CREATE TABLE `cities` (
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
 
-INSERT INTO `cities` (`cities_id`, `citites_name`, `citites_class`, `cities_caton`, `cities_kml`, `cities_polulation`, `cities_win_score`, `users_id`, `cities_win_dt`)
+INSERT INTO `cities` (`cities_id`, `cities_name`, `cities_class`, `cities_caton`, `cities_kml`, `cities_population`, `cities_win_score`, `users_id`, `cities_win_dt`)
 VALUES
-	('ROUEN','Rouen','BIG','ROUEN','???\n',105000,NULL,NULL,NULL);
+	('ROUEN','Rouen','BIG','ROUEN','???\n',105000,NULL,1,NULL);
 
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -97,17 +97,17 @@ CREATE TABLE `questions` (
   `questions_resp_2` varchar(1024) DEFAULT NULL,
   `questions_resp_3` varchar(1024) DEFAULT NULL,
   `questions_resp_good` int(1) DEFAULT NULL,
-  `citites_id` varchar(255) NOT NULL DEFAULT '',
+  `cities_id` varchar(255) NOT NULL DEFAULT '',
   `questions_datasource` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`questions_id`),
-  KEY `citites_id` (`citites_id`),
-  CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`citites_id`) REFERENCES `cities` (`cities_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `cities_id` (`cities_id`),
+  CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`cities_id`) REFERENCES `cities` (`cities_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
 
-INSERT INTO `questions` (`questions_id`, `questions_text`, `questions_type`, `questions_resp_1`, `questions_resp_2`, `questions_resp_3`, `questions_resp_good`, `citites_id`, `questions_datasource`)
+INSERT INTO `questions` (`questions_id`, `questions_text`, `questions_type`, `questions_resp_1`, `questions_resp_2`, `questions_resp_3`, `questions_resp_good`, `cities_id`, `questions_datasource`)
 VALUES
 	(1,'Quel est la population de la ville ?','VALUE','105000',NULL,NULL,1,'ROUEN','fic_76_commune');
 
@@ -169,7 +169,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`users_id`, `users_email`, `users_password`, `users_pseudo`, `users_round_avail`, `users_round_played`)
 VALUES
-	(1,'olivier@cigogne.net','','omartineau',10,0);
+	(1,'olivier@cigogne.net','37fa265330ad83eaa879efb1e2db6380896cf639','omartineau',10,0);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

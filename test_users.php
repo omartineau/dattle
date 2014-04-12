@@ -3,19 +3,18 @@ include('config.php');
 
 echo "<pre>";
 
-echo "create empty user\n";
+
+echo "try to auth olivier@cigogne.net:pwd\n";
 $u = new User();
+//$u->Create('toto@mail.com', 'pwd', 'toto');
+$u->Auth('olivier@cigogne.net', 'pwd');
 var_dump($u);
 echo "\n";
 
-echo "try to auth toto@mail.com:bad-pwd";
-$u->Auth('toto@mail.com', 'bad-pwd');
-var_dump($u);
-echo "\n";
+echo "Get user cities\n";
+$cities = City::getUserCities($u->users_id);
+var_dump($cities);
 
-echo "try to create toto@mail.com:pwd (toto)";
-$u->Create('toto@mail.com', 'pwd', 'toto');
-var_dump($u);
-echo "\n";
+
 
 echo "</pre>";
