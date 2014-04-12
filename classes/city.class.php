@@ -37,4 +37,24 @@ class City
 
     }
 
+    // return cities for an user
+    static function getUserCities($users_id, $limit = 1000)
+    {
+        global $con;
+
+        $query = $con->prepare("SELECT cities_id FROM cities WHERE users_id = :users_id
+            ORDER BY cities_population DESC LIMIT :limit");
+        $query->bindParam(':users_id', $users_id, PDO::PARAM_INT);
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+
+        $query->execute();
+        $citiesList = array();
+        while ($f = $query->fetch(PDO::FETCH_OBJ)) {
+            $citiesList[] = $f->cities_id;
+        }
+        return $citiesList;
+    }
+
+
+
 }

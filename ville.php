@@ -27,9 +27,9 @@ if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
     $duree_reponse = round( (microtime(true) - floatval($_SESSION['time_debut_question'])),0);
     unset($_SESSION['time_debut_question']);
     if ($duree_reponse >= DUREE_MAX) {
-        $coef_duree = 50;
+        $coef_point = 50;
     } else {
-        $coef_duree = ceil(100-($duree_reponse)*50/DUREE_MAX);
+        $coef_point = ceil(100-($duree_reponse)*50/DUREE_MAX);
     }
     $q_prec = new Question($_SESSION['question_a_repondre']);
     $win = false;
@@ -42,7 +42,7 @@ if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
                 #echo intval($_POST['replyvalue']) ."-". $q_prec->questions_resp_1 ."/". $q_prec->questions_resp_1."*".MARGE_ERREUR;
                 $coef_point = 1 - abs( intval($_POST['replyvalue']) - $q_prec->questions_resp_1) / ($q_prec->questions_resp_1*MARGE_ERREUR) ;
                 #echo "coef point = ".$coef_point."<br/>";
-                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point*$coef_duree/100);
+                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point);
                 $win = true;
             }
             break;
@@ -50,7 +50,7 @@ if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
             #echo intval($_POST['replyqcm'])." == ". $q_prec->questions_resp_good;
             if ( isset($_POST['replyqcm']) && intval($_POST['replyqcm']) ==  $q_prec->questions_resp_good ) {
                 #echo "Point = ".POINT_PAR_QUESTION."<br/>";
-                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_duree/100);
+                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point/100);
                 $win = true;
             }
             break;
