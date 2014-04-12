@@ -42,9 +42,9 @@ Nombre de question restante {{ objectif.nb_quest_restant }}</div>
 
     {% if q.questions_type == "QCM" %}
         <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_1 }}<br>
-        <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_2 }}<br>
+        <input type="radio" name="replyqcm" value="2">{{ q.questions_resp_2 }}<br>
         {% if q.questions_resp_3 %}
-            <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_3 }}<br>
+            <input type="radio" name="replyqcm" value="3">{{ q.questions_resp_3 }}<br>
         {% endif %}
     {% endif %}
 
