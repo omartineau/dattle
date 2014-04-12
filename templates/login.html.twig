@@ -1,5 +1,6 @@
 {% if user.logged %}
     Bienvenue {{ user.users_pseudo }} !<br/>
+    <a href="logout.php">logout</a>
 
 {% else %}
     <form method="POST" action="login.php">

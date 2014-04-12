@@ -16,6 +16,7 @@
                 <td>Nom</td>
                 <td>Classe</td>
                 <td>Etat</td>
+                <td>Date de capture</td>
             </tr>
         {% for city in cities %}
             <tr>
@@ -26,6 +27,7 @@
                     {% elseif city.users_id == user.users_id %} "Moi"
                     {% else %} <a href="cityInfo.php?city={{ city.cities_id }}">"Occupé"</a>
                     {% endif %}</td>
+                <td>{% if city.users_id != 0 %}{{ city.cities_win_dt2 }}{% endif %}</td>
             </tr>
         {% endfor %}
         </table>

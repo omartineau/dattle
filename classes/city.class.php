@@ -44,7 +44,8 @@ class City
             $this->cities_win_dt2  = "";
             if ($this->cities_win_dt2_iv->d > 0)
                 $this->cities_win_dt2 .= $this->cities_win_dt2_iv->d . 'j ';
-            $this->cities_win_dt2 .= $this->cities_win_dt2_iv->h . 'h ';
+            if ($this->cities_win_dt2_iv->h > 0)
+                $this->cities_win_dt2 .= $this->cities_win_dt2_iv->h . 'h ';
             $this->cities_win_dt2 .= $this->cities_win_dt2_iv->i . 'm ';
             //var_dump($this->cities_win_dt2_iv);
         }
