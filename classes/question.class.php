@@ -39,12 +39,14 @@ class Question
     }
     static function getQuestions($cities_id,$question_numb) {
         global $con;
-        $query = $con->query("SELECT questions_id FROM questions WHERE cities_id='".$cities_id."' ORDER BY RAND() LIMIT ".$question_numb);
-        $query->setFetchMode(PDO::FETCH_OBJ);
+        $query = $con->prepare("SELECT questions_id FROM questions WHERE cities_id=:cities_id ORDER BY RAND() LIMIT :question_numb ");
+        $query->bindParam(':cities_id', $cities_id);
+        $query->bindParam(':question_numb', $question_numb, PDO::PARAM_INT);
+        $query->execute();
         $questionsList = array();
-        while ($f = $query->fetch()) {
+        while ($f = $query->fetch(PDO::FETCH_OBJ)) {
             $questionsList[] = $f->questions_id;
         }
-
+        return $questionsList;
     }
 }
