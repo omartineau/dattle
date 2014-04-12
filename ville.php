@@ -25,29 +25,32 @@ if (!isset($_SESSION['questions'])) {
 # gestion de la réponse prédédente
 if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
     $duree_reponse = round( (microtime(true) - floatval($_SESSION['time_debut_question'])),0);
-    echo "durée ".microtime(true).'-'. $_SESSION['time_debut_question']."<br/>";
-    echo "durée ".$duree_reponse."<br/>";
     unset($_SESSION['time_debut_question']);
-    $coef_point = ceil(100-(DUREE_MAX-$duree_reponse)*50/15);
-    echo "Coef temp = ".$coef_point."<br/>";
-
+    if ($duree_reponse >= DUREE_MAX) {
+        $coef_duree = 50;
+    } else {
+        $coef_duree = ceil(100-($duree_reponse)*50/DUREE_MAX);
+    }
     $q_prec = new Question($_SESSION['question_a_repondre']);
     $win = false;
     switch ($q_prec->questions_type) {
         case "VALUE" :
-            if ( intval($_POST['replyvalue']) <  $q_prec->questions_resp_1*(1+MARGE_ERREUR) &&
-                intval($_POST['replyvalue']) >  $q_prec->questions_resp_1*(1-MARGE_ERREUR)
+            if ( isset($_POST['replyvalue']) &&
+                 intval($_POST['replyvalue']) <  $q_prec->questions_resp_1*(1+MARGE_ERREUR) &&
+                 intval($_POST['replyvalue']) >  $q_prec->questions_resp_1*(1-MARGE_ERREUR)
             ) {
-                $coef_point = 1 - ( intval($_POST['replyvalue']) - $q_prec->questions_resp_1) / ($q_prec->questions_resp_1*MARGE_ERREUR) ;
-                echo "coef point = ".$coef_point."<br/>";
-                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point/100);
+                #echo intval($_POST['replyvalue']) ."-". $q_prec->questions_resp_1 ."/". $q_prec->questions_resp_1."*".MARGE_ERREUR;
+                $coef_point = 1 - abs( intval($_POST['replyvalue']) - $q_prec->questions_resp_1) / ($q_prec->questions_resp_1*MARGE_ERREUR) ;
+                #echo "coef point = ".$coef_point."<br/>";
+                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point*$coef_duree/100);
                 $win = true;
             }
             break;
         case "QCM" :
-            if ( intval($_POST['replyqcm']) ==  $q_prec->questions_resp_good ) {
-                echo "Point = ".POINT_PAR_QUESTION."<br/>";
-                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_point/100);
+            #echo intval($_POST['replyqcm'])." == ". $q_prec->questions_resp_good;
+            if ( isset($_POST['replyqcm']) && intval($_POST['replyqcm']) ==  $q_prec->questions_resp_good ) {
+                #echo "Point = ".POINT_PAR_QUESTION."<br/>";
+                $_SESSION['score'] += ceil(POINT_PAR_QUESTION*$coef_duree/100);
                 $win = true;
             }
             break;
@@ -55,18 +58,20 @@ if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
     }
 
     if ($win) {
-        echo "<b>GOOOODDDDD : ".$_SESSION['score']." points</b>";
+        echo "<br/><b>GOOOODDDDD : ".$_SESSION['score']." points</b>";
     } else {
-        echo "<b>NON toujours à : ".$_SESSION['score']." points</b>";
+        echo "<br/><b>NON toujours à : ".$_SESSION['score']." points</b>";
     }
     unset ($_SESSION['question_a_repondre']);
 }
 
 if (empty($_SESSION['questions'])) {
     # fin des question affichage du compte total
-    echo "Fini le compte du score.... Alors on l'a récupéré ou pas ? <br/>";
+    echo "<br/>Fini le compte du score.... Alors on l'a récupéré ou pas ? <br/>";
     if ($_SESSION['score'] > $_SESSION['score_cible'] ) {
         echo "<b>WIN WIN WIN WIN </b>";
+    } else {
+        echo "<b>Non pas cette fois </b>";
     }
     unset($_SESSION['questions']);
 } else {
@@ -95,6 +100,9 @@ if (empty($_SESSION['questions'])) {
     if (count($_SESSION['questions'])) {
         echo "Encore ".count($_SESSION['questions'])." questions";
     }
+    $pourcent = round($_SESSION['score']/$_SESSION['score_cible']*100)-1;
+    if ($pourcent<0) $pourcent = 0;
+    echo "<br/>Vous êtes à ".$pourcent."% de l'objectif";
     echo "</form>";
     $_SESSION['time_debut_question'] = microtime(true);
 }
