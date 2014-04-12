@@ -1,5 +1,6 @@
 <html>
     <head>
+        {% include "map.html.twig" %}
     </head>
 
     <body>
@@ -8,29 +9,10 @@
         </div>
 
 
-        <p>Lorem ipsus bla bla bla</p>
 
-        <table>
-            <tr>
-                <td>ID</td>
-                <td>Nom</td>
-                <td>Classe</td>
-                <td>Etat</td>
-                <td>Date de capture</td>
-            </tr>
-        {% for city in cities %}
-            <tr>
-                <td>{{ city.cities_id }}</td>
-                <td>{{ city.cities_name }}</td>
-                <td>{{ city.cities_class }}</td>
-                <td>{% if city.users_id == 0 %} <a href="cityInfo.php?city={{ city.cities_id }}">"Libre"</a>
-                    {% elseif city.users_id == user.users_id %} "Moi"
-                    {% else %} <a href="cityInfo.php?city={{ city.cities_id }}">"Occupé"</a>
-                    {% endif %}</td>
-                <td>{% if city.users_id != 0 %}{{ city.cities_win_dt2 }}{% endif %}</td>
-            </tr>
-        {% endfor %}
-        </table>
+        <div id="map-canvas"/>
+
+
 
     </body>
 </html>
