@@ -1,13 +1,8 @@
-
-{% if loginFailed %}
-<p>Mauvais email ou mot de passe !</p>
-{% endif %}
-
 {% if user.logged %}
-    Bienvenue {{ user.users_pseudo }} !
+    Bienvenue {{ user.users_pseudo }} !<br/>
 
 {% else %}
-    <form method="POST">
+    <form method="POST" action="login.php">
         <p>email : <input name='email' type="text" /></p>
         <p>password : <input name="password" type="password" /></p>
         <INPUT TYPE="submit" VALUE="login" />

@@ -50,7 +50,7 @@ class City
     }
 
     // return cities for an user
-    static function getUserCities($users_id, $limit = 1000)
+    static function getUserCitiesId($users_id, $limit = 100)
     {
         global $con;
 
@@ -63,6 +63,22 @@ class City
         $citiesList = array();
         while ($f = $query->fetch(PDO::FETCH_OBJ)) {
             $citiesList[] = $f->cities_id;
+        }
+        return $citiesList;
+    }
+
+    // return all cities
+    static function getAllCities($limit = 100)
+    {
+        global $con;
+
+        $query = $con->prepare("SELECT cities_id FROM cities LIMIT :limit");
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+
+        $query->execute();
+        $citiesList = array();
+        while ($f = $query->fetch(PDO::FETCH_OBJ)) {
+            $citiesList[] = new City($f->cities_id);
         }
         return $citiesList;
     }
