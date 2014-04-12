@@ -1,6 +1,7 @@
 <?php
 include('config.php');
 
+$tpl = array();
 
 # initialisation du questionnaire
 if (!empty($_GET['city']) && !isset($_SESSION['questions']) ) {
@@ -58,54 +59,72 @@ if (isset($_SESSION['question_a_repondre'])) { // Pas pour la première question
     }
 
     if ($win) {
-        echo "<br/><b>GOOOODDDDD : ".$_SESSION['score']." points</b>";
+        $tpl['objectif']['question_win'] = true;
+        ###echo "<br/><b>GOOOODDDDD : ".$_SESSION['score']." points</b>";
     } else {
-        echo "<br/><b>NON toujours à : ".$_SESSION['score']." points</b>";
+        $tpl['objectif']['question_win'] = false;
+        ###echo "<br/><b>NON toujours à : ".$_SESSION['score']." points</b>";
     }
     unset ($_SESSION['question_a_repondre']);
 }
 
 if (empty($_SESSION['questions'])) {
+    $tpl['objectif']['fini'] = true;
     # fin des question affichage du compte total
-    echo "<br/>Fini le compte du score.... Alors on l'a récupéré ou pas ? <br/>";
+    ###echo "<br/>Fini le compte du score.... Alors on l'a récupéré ou pas ? <br/>";
     if ($_SESSION['score'] > $_SESSION['score_cible'] ) {
-        echo "<b>WIN WIN WIN WIN </b>";
+        $tpl['objectif']['ville_win'] = true;
+
+        ###echo "<b>WIN WIN WIN WIN </b>";
     } else {
-        echo "<b>Non pas cette fois </b>";
+        $tpl['objectif']['ville_win'] = false;
+        ###echo "<b>Non pas cette fois </b>";
     }
     unset($_SESSION['questions']);
+    $q = null; // initialisation mini pour twig
 } else {
+    $tpl['objectif']['fini'] = false;
 
     # on pose les question
-    echo "<form  method='post'>";
+    ###echo "<form  method='post'>";
     $numquestion = $_SESSION['nb_questions'] - count($_SESSION['questions'])  + 1;
-    echo "Question n°".$numquestion."/".$_SESSION['nb_questions'];
+    $tpl['objectif']['num_quest'] = $numquestion;
+    ###echo "Question n°".$numquestion."/".$_SESSION['nb_questions'];
     $_SESSION['question_a_repondre'] = array_pop($_SESSION['questions']);
     $q = new Question($_SESSION['question_a_repondre']);
-    echo "QUESTION : ".$q->questions_text."<br>";
+    ###echo "QUESTION : ".$q->questions_text."<br>";
     switch ($q->questions_type) {
         case "VALUE" :
-            echo "<input name='replyvalue'></input>";
+            ###echo "<input name='replyvalue'></input>";
             break;
         case "QCM" :
-            echo '<input type="radio" name="replyqcm" value="1">'.$q->questions_resp_1."<br>";
-            echo '<input type="radio" name="replyqcm" value="2">'.$q->questions_resp_2."<br>";
+            ###echo '<input type="radio" name="replyqcm" value="1">'.$q->questions_resp_1."<br>";
+            ###echo '<input type="radio" name="replyqcm" value="2">'.$q->questions_resp_2."<br>";
             if ($q->questions_resp_3) {
-                echo '<input type="radio" name="replyqcm" value="3">'.$q->questions_resp_3."<br>";
+                ###echo '<input type="radio" name="replyqcm" value="3">'.$q->questions_resp_3."<br>";
             }
             break;
 
     }
-    echo '<INPUT TYPE="submit" VALUE="Enregistrer la réponse">';
+    ###echo '<INPUT TYPE="submit" VALUE="Enregistrer la réponse">';
+    $tpl['objectif']['nb_quest_restant'] = count($_SESSION['questions']);
+    $tpl['objectif']['nb_total_quest'] =  $_SESSION['nb_questions'];
     if (count($_SESSION['questions'])) {
-        echo "Encore ".count($_SESSION['questions'])." questions";
+        ###echo "Encore ".count($_SESSION['questions'])." questions";
     }
     $pourcent = round($_SESSION['score']/$_SESSION['score_cible']*100)-1;
     if ($pourcent<0) $pourcent = 0;
-    echo "<br/>Vous êtes à ".$pourcent."% de l'objectif";
-    echo "</form>";
+    $tpl['objectif']['palier'] = $_SESSION['score_cible'];
+    $tpl['objectif']['score'] = $_SESSION['score'];
+    $tpl['objectif']['pourcent'] = $pourcent;
+
+    ###echo "<br/>Vous êtes à ".$pourcent."% de l'objectif";
+    ###echo "</form>";
     $_SESSION['time_debut_question'] = microtime(true);
 }
 
+$tpl['q']=$q;
 
-#var_dump(Question::getQuestions('ROUEN',3));
+
+$template = $twig->loadTemplate('battle.html.twig');
+echo $template->render($tpl);

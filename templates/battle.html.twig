@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>Battle pour </title>
+</head>
+<body>
+
+{% if objectif.ville_win == false %}
+
+<div id="numquestion">Numero de la question {{ objectif.num_quest }}/{{ objectif.nb_total_quest }}
+    {% if objectif.nb_quest_restant %}
+    <br/>
+Nombre de question restante {{ objectif.nb_quest_restant }}</div>
+    {% endif %}
+{% endif %}
+
+{% if objectif.question_win %}
+<div id="resultatquestion">
+      La précédente réponse était juste
+</div>
+{% endif %}
+
+
+
+{% if objectif.fini == true %}
+<div id="resultatbattle">
+    Fini le compte du score.... Alors, êtes vous devenu Citoyen d'honneur ou pas ? <br/>
+    {% if objectif.ville_win == true %}
+        BRAVO
+    {% else %}
+        NON DESOLE
+    {% endif %}
+</div>
+{% endif %}
+
+{% if objectif.fini == false %}
+<form method="POST">
+<div id="question">
+    <strong>{{ q.questions_text }}</strong><br/>
+    {% if q.questions_type == "VALUE" %}
+        <input name='replyvalue'/>
+    {% endif %}
+
+    {% if q.questions_type == "QCM" %}
+        <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_1 }}<br>
+        <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_2 }}<br>
+        {% if q.questions_resp_3 %}
+            <input type="radio" name="replyqcm" value="1">{{ q.questions_resp_3 }}<br>
+        {% endif %}
+    {% endif %}
+
+    <INPUT TYPE="submit" VALUE="Enregistrer la réponse">
+</div>
+</form>
+
+
+<div id="avance">Avancée : {{ objectif.pourcent }}%<br/>
+Score actuel {{ objectif.score }} / Cible {{ objectif.palier }}</div>
+{% endif %}
+
+</body>
+</html>
