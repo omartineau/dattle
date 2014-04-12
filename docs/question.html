@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		
+		<style type="text/css">
+		
+		.gradient {
+			background: #e99433; /* Old browsers */
+			background: -moz-linear-gradient(45deg,  #e99433 0%, #d01c8b 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#e99433), color-stop(100%,#d01c8b)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(45deg,  #e99433 0%,#d01c8b 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(45deg,  #e99433 0%,#d01c8b 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(45deg,  #e99433 0%,#d01c8b 100%); /* IE10+ */
+			background: linear-gradient(45deg,  #e99433 0%,#d01c8b 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e99433', endColorstr='#d01c8b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+		}
+		
+		.question {
+		
+			width: 770px;
+			margin: 0 auto;
+		
+			background: #151515;
+			
+			border-radius: 15px;
+		
+		}
+		
+		.question hgroup {
+		
+			padding: 15px;
+			
+			border-bottom: 1px solid #0b0b0b;
+			box-shadow: 0px 1px 0px #1f1f1f;
+			
+		}
+		
+		.question hgroup h1 {
+			
+			float: left;
+			
+			margin: 0px;
+			padding: 0px;
+			
+			font-family: dinL;
+			font-size: 26px;
+			color: #e99533;
+			font-weight: normal;
+			
+		}
+		
+		.question hgroup h3 {
+		
+			float: right;
+			
+			margin: 0px;
+			margin-top: 10px;
+			padding: 0px;
+			
+			font-size: 15px;
+			font-family: dinL;
+			color: #6e6e6e;
+			font-weight: normal;
+			
+		}
+		
+		.question hgroup h3 strong  {
+		
+			color: #e99533;
+		
+		}
+		
+		.question .contentText {
+		
+			padding: 40px 50px;
+			
+		}
+		
+		.question .contentText .timer {
+		
+			width: 70px;
+			height: 70px;
+			
+			margin-left: 100px;
+			
+			float: right;
+			
+			outline: 1px solid red;
+		
+		}
+		
+		.question .contentText h3 {
+		
+			margin: 0px;
+			padding: 0px;
+		
+			font-family: dinM;
+			font-size: 15px;
+			color: #4e4e4e;
+			font-weight: normal;
+			text-transform: uppercase;
+		
+		}
+		
+		.question .contentText h2 {
+			
+			margin: 0px;
+			padding: 0px;
+			
+			font-family: dinL;
+			font-size: 22px;
+			color: #dbdbdb;
+			font-weight: normal;
+		
+		}
+		
+		.answers {
+		
+			margin: 0px 10px;
+			padding: 0px;
+		
+		}
+		
+		.answers li {
+		
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		
+		}
+		
+		.answers li a {
+		
+			float: left;
+			
+			display: block;
+			width: 220px;
+			padding: 10px 0px 10px 10px;
+			margin-left: 10px;
+			
+			text-align: center;
+			font-family: dinL;
+			font-size: 15px;
+			color: #ababab;
+			text-transform: uppercase;
+			text-decoration: none;
+			
+			background: #1e1e1e;
+			border: 1px solid #313131;
+			
+			border-radius: 5px;
+		
+		}
+		
+		.answers li a.active {
+		
+			color: #e99533;
+			border-color: #e99533;
+		
+		}
+		
+		.clear {
+			clear:both;
+		}
+		
+		</style>
+
+
+    </head>
+    <body class="gradient">
+
+
+        <img src="../img/logo_dattle_white.png" />
+        
+        
+        <div class="question">
+	        <hgroup>
+	        	<h1>Ville de Rouen</h1>
+	        	<h3>Actuellement, <strong>John</strong> Doe est le citoyen d’honneur de cette ville</h3>
+	        	<div class="clear"></div>
+	        </hgroup>
+	        
+	        <div class="contentText">
+	        	<div class="timer">
+		        	timer
+		        </div>
+	        	<h3>Question 3 / 30</h3>
+	        	<h2>Quelle est la ville la plus peuplée de ces trois communes Seino-marines ?</h2>
+	        </div>
+	        
+	        <ul class="answers">
+	        	<li><a href="#">Rouen</a></li>
+	        	<li><a href="#" class="active">Le Havre</a></li>
+	        	<li><a href="#">Criquetot</a></li>
+	        </ul>
+	        
+	        <div class="progress">
+	        	<h1>Votre progression</h1>
+	        	<div class="progressBar">
+	        		<div class="bar"></div>
+	        		<div class="target"><span>Score à battre</span></div>
+	        	</div>
+	        </div>
+	        
+        </div>
+        
+
+    </body>
+</html>
