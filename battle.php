@@ -1,6 +1,13 @@
 <?php
 include('includes/config.php');
 
+
+#patch autolog
+if (!$_SESSION['user']->users_id) {
+    echo "No";
+    $_SESSION['user'] = new User(1);
+}
+
 $tpl = array();
 
 # initialisation du questionnaire
@@ -14,10 +21,12 @@ if (!empty($_GET['city']) && !isset($_SESSION['questions']) ) {
         die ('Classe de la ville inconu');
     }
     $_SESSION['questions'] = Question::getQuestions($city->cities_id,$city_questions_count[$city->cities_class]);
-    var_dump($_SESSION['questions']);
     $_SESSION['nb_questions'] = $city_questions_count[$city->cities_class];
     $_SESSION['score'] = 0;
     $_SESSION['score_cible'] = ($city->cities_win_score?$city->cities_win_score:50);
+    $_SESSION['city'] = $city;
+} elseif (isset ($_SESSION['city'])) {
+    $city = $_SESSION['city'];
 }
 
 if (!isset($_SESSION['questions'])) {
@@ -75,7 +84,7 @@ if (empty($_SESSION['questions'])) {
     ###echo "<br/>Fini le compte du score.... Alors on l'a récupéré ou pas ? <br/>";
     if ($_SESSION['score'] > $_SESSION['score_cible'] ) {
         $tpl['objectif']['ville_win'] = true;
-
+        $city->capturedBy( $_SESSION['user']->users_id, $_SESSION['score'] );
         ###echo "<b>WIN WIN WIN WIN </b>";
     } else {
         $tpl['objectif']['ville_win'] = false;

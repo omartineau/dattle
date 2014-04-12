@@ -64,8 +64,10 @@ class City
             cities_win_score = :cities_win_score,
             cities_win_dt = NOW()
             WHERE cities_id = :cities_id");
+        $query->bindParam(':cities_id', $this->cities_id);
         $query->bindParam(':users_id', $users_id, PDO::PARAM_INT);
         $query->bindParam(':cities_win_score', $points, PDO::PARAM_INT);
+        $query->execute();
     }
 
 
