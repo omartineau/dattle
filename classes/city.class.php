@@ -24,15 +24,15 @@ class City
             $query->execute(array('cities_id'=>$cities_id));
 
             $f = $query->fetch(PDO::FETCH_OBJ);
-            $this->cities_id = $f->cities_id;
-            $this->cities_name = $f->cities_name;
-            $this->cities_class = $f->cities_class;
-            $this->cities_canton = $f->cities_canton;
-            $this->cities_kml = $f->cities_kml;
-            $this->cities_polulation = $f->cities_polulation;
-            $this->cities_win_score = $f->cities_win_score;
-            $this->users_id = $f->users_id;
-            $this->cities_win_dt = $f->cities_win_dt;
+            $this->cities_id         = $f->cities_id;
+            $this->cities_name       = $f->cities_name;
+            $this->cities_class      = $f->cities_class;
+            $this->cities_canton     = $f->cities_canton;
+            $this->cities_kml        = $f->cities_kml;
+            $this->cities_polulation = (int)$f->cities_polulation;
+            $this->cities_win_score  = (int)$f->cities_win_score;
+            $this->users_id          = (int)$f->users_id;
+            $this->cities_win_dt     = (int)$f->cities_win_dt;
 
             // capture date, DateInterval type
             $this->cities_win_dt2    = new DateTime($this->cities_win_dt);
