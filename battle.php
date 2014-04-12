@@ -16,7 +16,7 @@ if (!empty($_GET['city']) && !isset($_SESSION['questions']) ) {
     $_SESSION['questions'] = Question::getQuestions($city->cities_id,$city_questions_count[$city->cities_class]);
     $_SESSION['nb_questions'] = $city_questions_count[$city->cities_class];
     $_SESSION['score'] = 0;
-    $_SESSION['score_cible'] = $city->cities_win_score;
+    $_SESSION['score_cible'] = ($city->cities_win_score?$city->cities_win_score:50);
 }
 
 if (!isset($_SESSION['questions'])) {
