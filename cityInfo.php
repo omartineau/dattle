@@ -22,6 +22,7 @@ if (!empty($_GET['city']))
     $owner = new User($city->users_id);
 
     echo $template->render(array(
+        'user'  => $_SESSION['user'],
         'city'  => $city,
         'owner' => $owner,
         'questions' => $city_questions_count[$city->cities_class],
