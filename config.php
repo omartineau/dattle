@@ -2,7 +2,6 @@
 header("Content-Type: text/html; charset=UTF-8");
 include ('classes/question.class.php');
 include ('classes/city.class.php');
-unset($_SESSION['time_debut_question']);
 
 session_start();
 
@@ -30,6 +29,8 @@ $twig = new Twig_Environment($loader, array());
 
 # Paramètre de jeux
 define('DUREE_MAX', 15); // 15 secondes pour répondre
+define('POINT_PAR_QUESTION', 20); // 20 points sur chaque question
+define('MARGE_ERREUR', 0.5); // 50% de marge d'erreur sur les réponses
 
 # nombre de questions en fonction de la classe de la ville
 $city_questions_count = array (
