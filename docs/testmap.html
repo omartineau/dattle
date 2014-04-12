@@ -104,27 +104,29 @@
 		  ctaLayer.setMap(map);*/
 		  
 		  
-		  var image = new google.maps.MarkerImage("/img/picto_.png", null, null, null, new google.maps.Size(50,52));
+		  var img_win = new google.maps.MarkerImage("../img/gmap_marker_city_win.png", null, null, null, new google.maps.Size(40,40));
+		  var img_free = new google.maps.MarkerImage("../img/gmap_marker_city_free.png", null, null, null, new google.maps.Size(40,40));
+		  var img_mine = new google.maps.MarkerImage("../img/gmap_marker_city_mine.png", null, null, null, new google.maps.Size(40,40));
 		
 		// Création des markers
-		var marker**ID** = new google.maps.Marker({
-      		position: new google.maps.LatLng(<?php wpgeo_latitude(); ?> , <?php wpgeo_longitude(); ?>),
+		var marker1 = new google.maps.Marker({
+      		position: new google.maps.LatLng(49.8522948,1.2919694),
       		map: map,
       		cursor: "pointer",
-      		title:"**NOM COMMUNE**",
-      		icon: image
+      		title:"Notre Dame d'Aliermont",
+      		icon: img_free
   		});
   		
   		// Evenement au clic
-  		google.maps.event.addListener(marker**ID**, 'click', function() {
-  			//alert("pout<?php the_ID(); ?>");
-  			$("#overlay").attr("src","<?php the_permalink(); ?>");
+  		google.maps.event.addListener(marker1, 'click', function() {
+  			alert("pout");
+  			/*$("#overlay").attr("src","<?php the_permalink(); ?>");
   			$("#loading").fadeIn();
   			$("#overlay").load(function (){
   				$("#loading").fadeOut();
   				$("#overlay").fadeIn();
   				$("#close").fadeIn();
-  			});
+  			});*/
 		});
 		  
 		  

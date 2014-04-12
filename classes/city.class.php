@@ -12,6 +12,8 @@ class City
     public $users_id = 0;
     public $cities_win_dt = 0;
     public $cities_win_dt2;
+    public $cities_lat = 0;
+    public $cities_long = 0;
 
 
 
@@ -29,10 +31,12 @@ class City
             $this->cities_class      = $f->cities_class;
             $this->cities_canton     = $f->cities_canton;
             $this->cities_kml        = $f->cities_kml;
-            $this->cities_polulation = (int)$f->cities_polulation;
+            $this->cities_population = (int)$f->cities_population;
             $this->cities_win_score  = (int)$f->cities_win_score;
             $this->users_id          = (int)$f->users_id;
             $this->cities_win_dt     = $f->cities_win_dt;
+            $this->cities_lat        = (float)$f->cities_lat;
+            $this->cities_long       = (float)$f->cities_long;
 
             // capture date, DateInterval type
             $this->cities_win_dt2    = ($this->cities_win_dt != null)
@@ -66,7 +70,7 @@ class City
 
 
     // return cities for an user
-    static function getUserCitiesId($users_id, $limit = 100)
+    static function getUserCitiesId($users_id, $limit = 1000)
     {
         global $con;
 
@@ -84,11 +88,11 @@ class City
     }
 
     // return all cities
-    static function getAllCities($limit = 100)
+    static function getAllCities($limit = 1000)
     {
         global $con;
 
-        $query = $con->prepare("SELECT cities_id FROM cities ORDER BY cities_id LIMIT :limit");
+        $query = $con->prepare("SELECT cities_id FROM cities LIMIT :limit");
         $query->bindParam(':limit', $limit, PDO::PARAM_INT);
 
         $query->execute();
