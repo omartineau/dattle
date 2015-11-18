@@ -6,8 +6,8 @@ Jouez avec l'OpenData !
 Version bêta disponible ici : http://beta.dattle.fr
 
 Joueurs de test :
-* beta@fdattle.fr (mot de passe : dattle)
-* beta2@fdattle.fr (mot de passe : dattle)
+* beta@dattle.fr (mot de passe : dattle)
+* beta2@dattle.fr (mot de passe : dattle)
 
 Présentation
 ============
